@@ -120,7 +120,7 @@ This means:
 - The bounding box in the original image spans from `(234, 105)` to `(554, 667)`
 
 
-# YOLO Annotation labels
+### YOLO Annotation labels
 
 For YOLOv11 training, bounding box annotations were automatically converted to YOLO format using code in the training notebooks.
 
