@@ -72,32 +72,74 @@ results could be found in `Summary_Table.pdf` file.
   - `yolo_training_dots.ipynb`
  
 ---
-## Data Availability:
- Data could be downloaded from: [nanoparticle-classificaation-data](https://drive.google.com/drive/folders/1GdorkrrcLbj-b55gbeYYuipEBSp8yCJm).
- data is divided into folders: Triangles, Dots and Cubes. 
- each folder includes a folder with full images with description in theyre name: train/valid/test and another folder with masked segmentations particles
- classified by the folder they're in (e.g for triangle data: "triangle" or "circle" or "truncated") and bbox description of where and in which image the parcticle
-was originally found:
+## Data Availability
 
-dataset_originalImage_x1_y1_x2_y2
+The full dataset is available at:  
+[Nanoparticle Classification Data (Google Drive)](https://drive.google.com/drive/folders/1GdorkrrcLbj-b55gbeYYuipEBSp8yCJm)
 
-where: (x1,y1) is the bottom left point and (x2,y2) is the top right point of bounding box.
+The data is organized into three main folders:
+- **Triangles/**
+- **Dots/**
+- **Cubes/**
 
-for example:
+Each of these folders includes:
 
-> `triangles/truncated/triangle_train2_234_105_554_667.jpg`
+---
 
-means that object was segmented and masked from triangles data image "triangles_train2.jpg", classified as a truncated triangle and its bbox coordinates in original image are (x1,y1)=(234,105) (x2,y2)=(554,667).
+### 1. Full Images Folder
 
-for yolo training these annotations were transformed to yolo format annotations as shown in the yolo training notebooks functions to the following format:
-for each original image_name.jpg we made a yolo_labels_image_name.txt file which looks like:
+Contains original microscopy images, categorized into:
+- `train/` — for training
+- `valid/` — for validation
+- `test/` — for final testing
 
-class_id, x_center_norm, y_center_norm, norm_width, norm_height
+Each image filename indicates the type and index, e.g., `triangle_train2.jpg`.
 
-normalaized by original image size (w,h).
-each image has as many lines as obejcts detected in it.
+---
 
-yolo labels could be found at: [yolo labels full images](link).
+### 2. Masked Segmentations Folder
+
+Contains cropped single-particle images (as `.jpg`) extracted using the SAM model.  
+They are organized into class-specific subfolders, such as:
+- `triangle/`, `circle/`, `truncated/` (inside the `Triangles/` folder)
+
+Each filename is formatted as:
+
+datasetName_imageName_x1_y1_x2_y2.jpg
+
+Where:
+- `x1`, `y1` = bottom-left corner of bounding box  
+- `x2`, `y2` = top-right corner of bounding box
+
+#### Example:
+
+triangles/truncated/triangle_train2_234_105_554_667.jpg
+
+This means:
+- The object was extracted from `triangle_train2.jpg`
+- It was classified as a **truncated triangle**
+- The bounding box in the original image spans from `(234, 105)` to `(554, 667)`
+
+---
+
+## YOLO Annotations
+
+For YOLOv11 training, bounding box annotations were automatically converted to YOLO format using code in the training notebooks.
+
+Each image has a corresponding `.txt` file:
+
+yolo_labels/image_name.txt
+
+Each line in a label file follows the YOLO annotation format:
+
+class_id x_center_norm y_center_norm width_norm height_norm
+
+Where:
+- All values are **normalized** by the image width and height  
+- Each object in the image is represented by one line
+
+YOLO label files are available here:   [YOLO Labels (Google Drive)](link) 
+
 
 ---
 
