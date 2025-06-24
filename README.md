@@ -84,7 +84,7 @@ The data is organized into three main folders:
 
 Each of these folders includes:
 
----
+
 
 ### 1. Full Images Folder
 
@@ -95,7 +95,6 @@ Contains original microscopy images, categorized into:
 
 Each image filename indicates the type and index, e.g., `triangle_train2.jpg`.
 
----
 
 ### 2. Masked Segmentations Folder
 
@@ -120,7 +119,6 @@ This means:
 - It was classified as a **truncated triangle**
 - The bounding box in the original image spans from `(234, 105)` to `(554, 667)`
 
----
 
 ## YOLO Annotations
 
